@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package ca_2;
+
 import java.util.*;
 import java.io.*;
 
@@ -11,11 +12,9 @@ import java.io.*;
  * @author tamir
  */
 
-
 public class MainOrganization {
     private Scanner scanner;
     private List<Employee> employees;
-    
 
     // Basic menu enum
     enum MenuOption {
@@ -27,7 +26,7 @@ public class MainOrganization {
         this.employees = new ArrayList<>(); // Initialize the list
         initializeSystem();
     }
-    
+
     private void initializeSystem() {
         System.out.println("=== Bank Organization Management System ===");
         while (true) {
@@ -45,7 +44,7 @@ public class MainOrganization {
             }
         }
     }
-    
+
     private boolean loadDataFromFile(String filename) {
         try {
             File file = new File(filename);
@@ -104,7 +103,8 @@ public class MainOrganization {
     }
 
     public void run() {
-        System.out.println("=== Bank Organization Management System ===");
+        System.out.println("\n Bank Organization System Started!");
+        System.out.println("Managing: " + employees.size() + " employees");
 
         while (true) {
             try {
@@ -127,8 +127,11 @@ public class MainOrganization {
                 MenuOption selectedOption = options[choice - 1];
 
                 switch (selectedOption) {
+                    case DISPLAY_ALL:
+                        displayAllEmployees();
+                        break;
                     case EXIT:
-                        System.out.println("Seen you!");
+                        System.out.println("Thank you for using Bank Organization System! Goodbye!");
                         return;
                     default:
                         System.out.println("Feature not implemented yet - selected: " + selectedOption);
@@ -140,7 +143,18 @@ public class MainOrganization {
         }
     }
 
- 
+    public void displayAllEmployees() {
+        System.out.println("\n=== All Employees (" + employees.size() + ") ===");
+        if (employees.isEmpty()) {
+            System.out.println("No employees in the system.");
+            return;
+        }
+
+        for (Employee emp : employees) {
+            System.out.println("  " + emp.getDetails());
+        }
+    }
+
     public static void main(String[] args) {
         MainOrganization system = new MainOrganization();
         system.run();
