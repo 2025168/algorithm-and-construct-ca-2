@@ -37,4 +37,23 @@ public class EmployeeService {
         return merged;
     }
 
+    public Employee binarySearch(List<Employee> sortedEmployees, String name) {
+        int left = 0;
+        int right = sortedEmployees.size() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            Employee midEmployee = sortedEmployees.get(mid);
+            int comparison = midEmployee.getName().compareToIgnoreCase(name);
+
+            if (comparison == 0) {
+                return midEmployee;
+            } else if (comparison < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return null;
+    }
 }

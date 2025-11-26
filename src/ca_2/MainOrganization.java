@@ -94,6 +94,30 @@ public class MainOrganization {
         employees = sortedEmployees;
     }
 
+    public void searchEmployee() {
+        System.out.println("\n=== Search Employee (Using Binary Search) ===");
+
+        if (employees.isEmpty()) {
+            System.out.println("No employees to search. Please load data first.");
+            return;
+        }
+        List<Employee> sortedEmployees = employeeService.mergeSort(employees);
+        employees = sortedEmployees;
+
+        System.out.print("Enter employee name to search: ");
+        String searchName = scanner.nextLine();
+
+        Employee result = employeeService.binarySearch(employees, searchName);
+
+        if (result != null) {
+            System.out.println("\n Employee Found!");
+            System.out.println("====================");
+            System.out.println(result.getDetails());
+        } else {
+            System.out.println("\n Employee '" + searchName + "' not found in the system.");
+        }
+    }
+
     public void displayMenu() {
         System.out.println("\n=== Bank Organization System Menu ===");
         int optionNumber = 1;
@@ -150,6 +174,9 @@ public class MainOrganization {
                 switch (selectedOption) {
                     case SORT:
                         sortAndDisplay();
+                        break;
+                    case SEARCH:
+                        searchEmployee();
                         break;
                     case DISPLAY_ALL:
                         displayAllEmployees();
