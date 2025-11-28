@@ -29,6 +29,7 @@ public class MainOrganization {
         this.employees = new ArrayList<>();
         this.employeeService = new EmployeeService();
         this.employeeTree = new EmployeeBinaryTree();
+        this.newlyAddedEmployees = new ArrayList<>();
         initializeSystem();
     }
 
@@ -273,10 +274,11 @@ public class MainOrganization {
                         displayAllEmployees();
                         break;
                     case EXIT:
-                        System.out.println("Thank you for using Bank Organization System! Goodbye!");
+                        System.out.println("\nThank you for using Bank Organization System!");
+                        System.out.println("Final Statistics:");
+                        System.out.println("- Total employees: " + employees.size());
+                        System.out.println("Bye! Have a nice day.");
                         return;
-                    default:
-                        System.out.println("Feature not implemented yet - selected: " + selectedOption);
                 }
 
             } catch (NumberFormatException e) {
@@ -292,8 +294,21 @@ public class MainOrganization {
             return;
         }
 
+        // Group by department for better organization
+        Map<Department, List<Employee>> employeesByDept = new HashMap<>();
         for (Employee emp : employees) {
-            System.out.println("  " + emp.getDetails());
+            Department dept = emp.getDepartment();
+            if (!employeesByDept.containsKey(dept)) {
+                employeesByDept.put(dept, new ArrayList<>());
+            }
+            employeesByDept.get(dept).add(emp);
+        }
+
+        for (Department dept : employeesByDept.keySet()) {
+            System.out.println("\n--- " + dept.getFullName() + " ---");
+            for (Employee emp : employeesByDept.get(dept)) {
+                System.out.println("  " + emp.getDetails());
+            }
         }
     }
 
