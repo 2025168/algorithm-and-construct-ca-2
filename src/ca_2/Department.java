@@ -1,6 +1,8 @@
 package ca_2;
 
+// Department enum represents different departments in the bank organization.
 public enum Department {
+    // Define all available departments with their full names and descriptions
     IT("IT Development", "Technical systems and support"),
     SALES("Sales", "Handles client relationships and product sales"),
     HR("HR", "Employee hiring, training, and relations"),
@@ -11,14 +13,22 @@ public enum Department {
     TECH_SUPPORT("Technical Support", "User and system troubleshooting"),
     CUSTOMER_SERVICE("Customer Service", "Customer assistance and issue resolution");
 
+    // Department properties - constant variables
     private final String fullName;
     private final String description;
 
+    // Constructor for the Department enum
     Department(String fullName, String description) {
         this.fullName = fullName;
         this.description = description;
     }
 
-    public String getFullName() { return fullName; }
-    public String getDescription() { return description; }
+    // Returning full name and description for displaying
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }
